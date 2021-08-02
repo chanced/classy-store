@@ -15,6 +15,7 @@
         "skipLibCheck": true,
         "forceConsistentCasingInFileNames": true,
         "baseUrl": ".",
+        "outDir": "dist",
     },
     "include": [
         "src/**/*.d.ts",

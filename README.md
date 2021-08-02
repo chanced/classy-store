@@ -4,9 +4,15 @@ class stores for svelte. this is very much a WIP.
 
 ## Usage
 
+```bash
+npm i classy-store
+
+# yarn add classy-store
+```
+
 You must enable `experimentalDecorators` in your tsconfig to use the `@mutator` decorator.
 
-### Define your store
+### Define a store
 
 ```typescript
 import { mutator, Store } from "classy-store";
@@ -21,8 +27,11 @@ export class Spike extends Store<Spike> {
   @mutator
   inc(n = 1) {
     this.count = this.count + n;
+    // if you do not use @mutator, you can also:
+    // this.broadcast()
     return this.count;
   }
+
   @mutator
   async delayed() {
     const delay = new Promise((res) => setTimeout(res, 500));
@@ -32,7 +41,7 @@ export class Spike extends Store<Spike> {
 }
 ```
 
-### Use your store
+### Use the store
 
 ```html
 <script lang="ts">
