@@ -92,6 +92,13 @@ class Spike extends Store<Spike, MyEvents> {
 }
 ```
 
+## Notes
+
+### Dependencies
+
+- [tiny-typed-emitter](https://github.com/binier/tiny-typed-emitter/)
+- [events](https://github.com/browserify/events)
+
 ## TODO:
 
 - better name
