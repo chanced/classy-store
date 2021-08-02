@@ -1,0 +1,22 @@
+{
+  "name": "classy-store",
+  "version": "0.0.1",
+  "description": "class based stores for svelte",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chanced/classy-store.git"
+  },
+  "keywords": [
+    "svelte"
+  ],
+  "author": "chance dinkins",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/chanced/classy-store/issues"
+  },
+  "homepage": "https://github.com/chanced/classy-store#readme"
+}
