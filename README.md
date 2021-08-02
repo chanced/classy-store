@@ -17,7 +17,6 @@ export class Spike extends Store<Spike> {
     super();
     this.name = name;
     this.count = count ?? 0;
-    this.emit("start", this);
   }
   @mutator
   inc(n = 1) {
@@ -34,6 +33,7 @@ export class Spike extends Store<Spike> {
 ```
 
 ### Use your store
+
 ```html
 <script lang="ts">
 	import { Spike } from '$lib/spike';
@@ -54,20 +54,20 @@ export class Spike extends Store<Spike> {
 
 The stores can be derived:
 
-
 ```html
 <script lang="ts">
-	import { Spike } from '$lib/spike';
-    import {derived} from 'svelte/store'
-	let spike = new Spike('this is a store');
-    const screaming = derived(spike, ($spike) => $spike.name.toUpperCase());
+  import { Spike } from "$lib/spike";
+  import { derived } from "svelte/store";
+  let spike = new Spike("this is a store");
+  const screaming = derived(spike, ($spike) => $spike.name.toUpperCase());
 </script>
 <h1>hello {$screaming}</h1>
 
-<input bind:value={$spike.name} />
-
+<input bind:value="{$spike.name}" />
 ```
+
 ## TODO:
+
 - better name
 - tests
-- better handling around promises? 
+- better handling around promises?
