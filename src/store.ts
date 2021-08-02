@@ -19,17 +19,46 @@ class Base<T> extends (EventEmitter as { new <T>(): TypedEmitter<T> })<T> {
 	}
 }
 
+type IfEquals<T, U, Y = unknown, N = never> = (<G>() => G extends T ? 1 : 2) extends <
+	G,
+>() => G extends U ? 1 : 2
+	? Y
+	: N;
+
+type Promises<D> = {
+	[K in keyof D as D[K] extends (..._: never[]) => Promise<unknown>
+		? IfEquals<ReturnType<D[K]>, any, never, K>
+		: never]: D[K] extends (..._: never[]) => infer P ? P : never;
+};
+
+export enum ExecutingStatus {
+	Pending = "pending",
+	Resolved = "resolved",
+	Error = "error",
+}
+
+export type ExecutingStatuses<T, V = Promises<T>> = Partial<
+	{
+		[K in keyof V]: ExecutingStatus;
+	}
+>;
+
 export abstract class Store<T extends Store<T, E>, E = void> extends Base<
 	Events<T, E> & Omit<E, keyof Events<T, E>>
 > {
-	protected subscribers: Set<SubscribeInvalidateTuple<T>>;
 	private unsubscriber: Unsubscriber | null;
 	private readonly starter: StartStopNotifier<T>;
+
+	protected subscribers: Set<SubscribeInvalidateTuple<T>>;
+
+	readonly executing: ExecutingStatuses<T>;
+
 	constructor(options?: Options<T, E> | StartStopNotifier<T>) {
 		super();
 		if (typeof options == "function") {
 			options = { startStopNotifier: options };
 		}
+		this.executing = {};
 		options = options || {};
 		this.subscribers = new Set();
 		this.unsubscriber = null;
@@ -47,6 +76,7 @@ export abstract class Store<T extends Store<T, E>, E = void> extends Base<
 			return;
 		}
 		Object.assign(this, removeReserved(value));
+		(this as any).emit("update", this);
 		this.broadcast();
 	}
 	update(updater: Updater<Store<T, E>>): void {

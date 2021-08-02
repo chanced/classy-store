@@ -32,10 +32,24 @@
 	"ts-node": {
 		"transpileOnly": true,
 		"compilerOptions": {
-			"module": "commonjs"
+			"module": "commonjs",
+			"experimentalDecorators": true,
+			"target": "ES2015",
+			"importsNotUsedAsValues": "error",
+			"isolatedModules": true,
+			"resolveJsonModule": true,
+			"sourceMap": true,
+			"esModuleInterop": true,
+			"skipLibCheck": true,
+			"forceConsistentCasingInFileNames": true,
+			"baseUrl": ".",
+			"outDir": "dist",
+			"declaration": true,
+			"declarationDir": "dist/dts"
 		},
 		"include": [
-			"tests/**/*"
+			"tests/**/*.ts",
+			"tests/*.ts"
 		]
 	},
 }
