@@ -91,6 +91,16 @@ class Spike extends Store<Spike, MyEvents> {
 }
 ```
 
+You can update the store with a new instance or a partial of the fields:
+```typescript
+<script lang="ts">
+	import { Spike } from '$lib/spike';
+	let spike = new Spike('this is a store');
+</script>
+
+<h1>Hello {$spike.name}</h1>
+<button on:click={()=> { $spike.set({name:"..."})}}>
+```
 ## Notes
 
 ### Dependencies
