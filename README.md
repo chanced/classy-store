@@ -17,26 +17,26 @@ You must enable `experimentalDecorators` in your tsconfig to use the `@mutator` 
 ```typescript
 import { mutator, Store } from "classy-store";
 export class Spike extends Store<Spike> {
-  name: string;
-  count: number;
-  constructor(name: string, count?: number) {
-    super();
-    this.name = name;
-    this.count = count ?? 0;
-  }
-  @mutator
-  inc(n = 1) {
-    this.count = this.count + n;
-    // if you do not use @mutator, you can also:
-    // this.broadcast()
-    return this.count;
-  }
+	name: string;
+	count: number;
+	constructor(name: string, count?: number) {
+		super();
+		this.name = name;
+		this.count = count ?? 0;
+	}
+	@mutator
+	inc(n = 1) {
+		this.count = this.count + n;
+		// if you do not use @mutator, you can also:
+		// this.broadcast()
+		return this.count;
+	}
 
-  @mutator
-  async delayed() {
-    await new Promise((res) => setTimeout(res, 500));
-    this.count + 100;
-  }
+	@mutator
+	async delayed() {
+		await new Promise((res) => setTimeout(res, 500));
+		this.count + 100;
+	}
 }
 ```
 
@@ -64,10 +64,10 @@ The stores can be derived:
 
 ```html
 <script lang="ts">
-  import { Spike } from "$lib/spike";
-  import { derived } from "svelte/store";
-  let spike = new Spike("this is a store");
-  const screaming = derived(spike, ($spike) => $spike.name.toUpperCase());
+	import { Spike } from "$lib/spike";
+	import { derived } from "svelte/store";
+	let spike = new Spike("this is a store");
+	const screaming = derived(spike, ($spike) => $spike.name.toUpperCase());
 </script>
 <h1>hello {$screaming}</h1>
 
@@ -80,37 +80,39 @@ If you wish to emit custom events, type your store such as:
 
 ```typescript
 interface MyEvents {
-  example: (value: string) => void;
+	example: (value: string) => void;
 }
 
 class Spike extends Store<Spike, MyEvents> {
-  constructor() {
-    super();
-    this.emit("example", "example should be typed");
-  }
+	constructor() {
+		super();
+		this.emit("example", "example should be typed");
+	}
 }
 ```
 
 You can update the store with a new instance or a partial of the fields:
-```typescript
+
+```html
 <script lang="ts">
-	import { Spike } from '$lib/spike';
-	let spike = new Spike('this is a store');
+	import { Spike } from "$lib/spike";
+	let spike = new Spike("this is a store");
 </script>
 
 <h1>Hello {$spike.name}</h1>
 <button on:click={()=> { $spike.set({name:"..."})}}>
 ```
+
 ## Notes
 
 ### Dependencies
 
-- [tiny-typed-emitter](https://github.com/binier/tiny-typed-emitter/)
-- [events](https://github.com/browserify/events)
+-   [tiny-typed-emitter](https://github.com/binier/tiny-typed-emitter/)
+-   [events](https://github.com/browserify/events)
 
 ## TODO:
 
-- better name
-- tests
-- better handling around promises?
-- better docs
+-   better name
+-   tests
+-   better handling around promises?
+-   better docs
