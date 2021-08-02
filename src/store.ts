@@ -48,16 +48,11 @@ const invalidator = 1;
 export interface Events<T extends Store<T, E>, E extends ListenerSignature<E>> {
 	start: (store: Store<T, E>) => void;
 	stop: (store: T) => void;
-	error: (error: Error) => void;
+	error: (error: any) => void;
 	update: (store: T) => void;
 }
 
 export type PartialPayload<T> = Omit<Partial<T>, ReservedKeys>;
-
-function removeUnsafe<T>(value: T): PartialPayload<T> {
-	const { ...val } = value as any;
-	return val;
-}
 
 export type ReservableKey<T extends Store<T, E>, E extends ListenerSignature<E> = void> = Exclude<
 	keyof T,
@@ -142,3 +137,11 @@ export abstract class Store<
 }
 
 export default Store;
+
+function removeUnsafe(value: any): any {
+	value = value || {};
+	for (const key of Object.keys(value)) {
+		key;
+	}
+	return { ...value };
+}

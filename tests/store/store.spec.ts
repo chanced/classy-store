@@ -17,6 +17,6 @@ class Test1 extends Store<Test1> {
 
 test("...", () => {
 	const t = new Test1();
-	// t.set({})
+	t.set({ emit: (u, v) => true });
 	t;
 });

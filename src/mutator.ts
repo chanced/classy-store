@@ -15,9 +15,6 @@ export function mutator<T extends Store<T, E>, E extends ListenerSignature<E>>(
 					this.set(this);
 				})
 				.catch((err) => {
-					if (!(err instanceof Error)) {
-						err = new Error(err);
-					}
 					this.emit("error", err);
 				});
 		} else {
