@@ -4,7 +4,7 @@ class stores for svelte. this is very much a WIP.
 
 ## Usage
 
-You must enable `experimentalDecorators` to use the `@mutator` decorator.
+You must enable `experimentalDecorators` in your tsconfig to use the `@mutator` decorator.
 
 ### Define your store
 
