@@ -71,17 +71,17 @@ The stores are event emitters although more work is needed on that front.
 If you wish to emit custom events, type your store such as:
 
 ```typescript
-
 interface MyEvents {
-    example: (value: string)=> void
+  example: (value: string) => void;
 }
 
 class Spike extends Store<Spike, MyEvents> {
-    constructor() {
-        super()
-        this.emit("example", "example should be typed")
-    }
+  constructor() {
+    super();
+    this.emit("example", "example should be typed");
+  }
 }
+```
 
 ## TODO:
 
@@ -89,4 +89,3 @@ class Spike extends Store<Spike, MyEvents> {
 - tests
 - better handling around promises?
 - better docs
-```
