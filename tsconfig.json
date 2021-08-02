@@ -1,0 +1,24 @@
+{
+    "compilerOptions": {
+        "moduleResolution": "node",
+        "module": "es2020",
+        "experimentalDecorators": true,
+        "lib": [
+            "es2020",
+        ],
+        "target": "ES2015",
+        "importsNotUsedAsValues": "error",
+        "isolatedModules": true,
+        "resolveJsonModule": true,
+        "sourceMap": true,
+        "esModuleInterop": true,
+        "skipLibCheck": true,
+        "forceConsistentCasingInFileNames": true,
+        "baseUrl": ".",
+    },
+    "include": [
+        "src/**/*.d.ts",
+        "src/**/*.js",
+        "src/**/*.ts",
+    ]
+}
