@@ -24,7 +24,7 @@ export class Spike extends Store<Spike> {
 		this.name = name;
 		this.count = count ?? 0;
 	}
-	@mutator
+	@mutator // <-- wraps your method so that updates are fired appropriately
 	inc(n = 1) {
 		this.count = this.count + n;
 		// if you do not use @mutator, you can also:
