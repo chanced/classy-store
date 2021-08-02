@@ -34,8 +34,7 @@ export class Spike extends Store<Spike> {
 
   @mutator
   async delayed() {
-    const delay = new Promise((res) => setTimeout(res, 500));
-    await delay;
+    await new Promise((res) => setTimeout(res, 500));
     this.count + 100;
   }
 }
