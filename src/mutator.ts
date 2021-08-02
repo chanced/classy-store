@@ -3,7 +3,7 @@ import type { Store } from "./store";
 
 export function mutator<T extends Store<T, E>, E extends ListenerSignature<E>>(
 	target: T,
-	propertyKey: string,
+	propertyKey: keyof T,
 	descriptor: PropertyDescriptor,
 ): PropertyDescriptor {
 	const method = descriptor.value;

@@ -3,12 +3,39 @@
 
 import { TypedEmitter } from "tiny-typed-emitter";
 import type { ListenerSignature } from "tiny-typed-emitter";
-export declare type Subscriber<T> = (value: T) => void;
+export declare type Subscriber<T> = (value: T | PartialPayload<T>) => void;
+
 export declare type Unsubscriber = () => void;
 export declare type Updater<T> = (value: T) => T;
 export declare type Invalidator<T> = (value?: T) => void;
 export type StartStopNotifier<T> = (set: Subscriber<T>) => Unsubscriber | void;
 // function proxyHandler = {}
+
+const protectedFields = [
+	"subscribers",
+	"set",
+	"subscribe",
+	"broadcast",
+	"update",
+	"addListener",
+	"defaultMaxListeners",
+	"prependListener",
+	"prependOnceListener",
+	"removeListener",
+	"removeAllListeners",
+	"once",
+	"on",
+	"off",
+	"emit",
+	"eventNames",
+	"listenerCount",
+	"listeners",
+	"rawListeners",
+	"getMaxListeners",
+	"setMaxListeners",
+	"unsubscriber",
+] as const;
+type ReservedKeys = typeof protectedFields[number];
 
 type SubscribeInvalidateTuple<T> = [subscriber: Subscriber<T>, invalidator: Invalidator<T>];
 
@@ -25,83 +52,51 @@ export interface Events<T extends Store<T, E>, E extends ListenerSignature<E>> {
 	update: (store: T) => void;
 }
 
-export type PartialPayload<T> = Omit<
-	Partial<T>,
-	| "subscribers"
-	| "set"
-	| "broadcast"
-	| "update"
-	| "defaultMaxListeners"
-	| "addListener"
-	| "prependListener"
-	| "prependOnceListener"
-	| "removeListener"
-	| "removeAllListeners"
-	| "once"
-	| "on"
-	| "off"
-	| "emit"
-	| "eventNames"
-	| "listenerCount"
-	| "listeners"
-	| "rawListeners"
-	| "getMaxListeners"
-	| "setMaxListeners"
->;
+export type PartialPayload<T> = Omit<Partial<T>, ReservedKeys>;
 
 function removeUnsafe<T>(value: T): PartialPayload<T> {
-	const {
-		subscribers,
-		set,
-		subscribe,
-		broadcast,
-		update,
-		addListener,
-		defaultMaxListeners,
-		prependListener,
-		prependOnceListener,
-		removeListener,
-		removeAllListeners,
-		once,
-		on,
-		off,
-		emit,
-		eventNames,
-		listenerCount,
-		listeners,
-		rawListeners,
-		getMaxListeners,
-		setMaxListeners,
-		unsubscriber,
-		...val
-	} = value as any;
+	const { ...val } = value as any;
 	return val;
 }
 
-export abstract class Store<
+export type ReservableKey<T extends Store<T, E>, E extends ListenerSignature<E> = void> = Exclude<
+	keyof T,
+	ReservedKeys
+>;
+
+export interface Options<
 	T extends Store<T, E> = Store<any>,
+	E extends ListenerSignature<E> = void,
+> {
+	startStopNotifier?: StartStopNotifier<T>;
+	protectedFields?: ReservableKey<T, E>[];
+}
+
+export abstract class Store<
+	T extends Store<T, E>,
 	E extends ListenerSignature<E> = void,
 > extends TypedEmitter<Events<T, E>> {
 	protected subscribers: Set<SubscribeInvalidateTuple<T>>;
-	protected readonly notifier: StartStopNotifier<T>;
 	private unsubscriber: Unsubscriber | null;
-	private starter: StartStopNotifier<T>;
-	constructor(startStop?: StartStopNotifier<T>) {
+	private readonly starter: StartStopNotifier<T>;
+	constructor(options?: Options<T, E> | StartStopNotifier<T>) {
 		super();
+		if (typeof options == "function") {
+			options = { startStopNotifier: options };
+		}
+		options = options || {};
 		this.subscribers = new Set();
 		this.unsubscriber = null;
 		this.emit("start", this);
-		this.starter = startStop;
-		this.notifier = (sub) => {
-			let result: void | Unsubscriber;
-			if (startStop !== undefined && startStop !== null && typeof startStop == "function") {
-				result = startStop(sub);
-			}
+		const startStop: StartStopNotifier<T> = options.startStopNotifier || noop;
+		this.starter = (sub) => {
+			const result = startStop(sub);
 			this.emit("start", this);
 			return result;
 		};
 	}
-	set(value: this | PartialPayload<this>): void {
+
+	set(value: Store<T, E> | PartialPayload<T>): void {
 		if (value === this) {
 			this.broadcast();
 			return;
@@ -109,7 +104,7 @@ export abstract class Store<
 		Object.assign(this, removeUnsafe(value));
 		this.broadcast();
 	}
-	update(updater: Updater<this>): void {
+	update(updater: Updater<Store<T, E>>): void {
 		const updated = updater(this);
 		if (updated !== undefined) {
 			this.set(updated);
@@ -121,7 +116,10 @@ export abstract class Store<
 		const subscriber: SubscribeInvalidateTuple<T> = [run, invalidate];
 		this.subscribers.add(subscriber);
 		if (this.subscribers.size === 1) {
-			this.unsubscriber = this.notifier(this.set as unknown as Subscriber<T>) || noop;
+			this.unsubscriber =
+				this.starter((val) => {
+					this.set(val);
+				}) || noop;
 		}
 		run(this as unknown as T);
 		return () => {
