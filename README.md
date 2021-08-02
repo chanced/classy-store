@@ -107,7 +107,7 @@ You can update the store with a new instance or a partial of the fields:
 
 ### Dependencies
 
--   [tiny-typed-emitter](https://github.com/binier/tiny-typed-emitter/)
+-   [typed-emitter](https://github.com/andywer/typed-emitter)
 -   [events](https://github.com/browserify/events)
 
 ## TODO:

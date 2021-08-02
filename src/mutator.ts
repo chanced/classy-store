@@ -1,7 +1,6 @@
-import type { ListenerSignature } from "tiny-typed-emitter";
 import type { Store } from "./store";
 
-export function mutator<T extends Store<T, E>, E extends ListenerSignature<E>>(
+export function mutator<T extends Store<T, E>, E = void>(
 	target: T,
 	propertyKey: keyof T,
 	descriptor: PropertyDescriptor,
