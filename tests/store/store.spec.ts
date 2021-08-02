@@ -1,4 +1,3 @@
-import { test } from "uvu";
 import * as assert from "uvu/assert";
 import { suite } from "uvu";
 import { Store } from "../../src/index";
@@ -23,7 +22,7 @@ emitters("should fire start after the first subscription", async () => {
 	const res = new Promise<void>((resolve, reject) => {
 		t.on("start", () => {
 			console.log("received start event");
-			assert.equal(beforeSubscribe, false, "should not start until after subscribe");
+			assert.equal(beforeSubscribe, true, "should not start until after subscribe");
 			resolve();
 		});
 	});
