@@ -1,6 +1,6 @@
 # classy-store
 
-class stores for svelte.
+class stores for svelte. this is very much a WIP.
 
 ## Usage
 
@@ -66,8 +66,27 @@ The stores can be derived:
 <input bind:value="{$spike.name}" />
 ```
 
+The stores are event emitters although more work is needed on that front.
+
+If you wish to emit custom events, type your store such as:
+
+```typescript
+
+interface MyEvents {
+    example: (value: string)=> void
+}
+
+class Spike extends Store<Spike, MyEvents> {
+    constructor() {
+        super()
+        this.emit("example", "example should be typed")
+    }
+}
+
 ## TODO:
 
 - better name
 - tests
 - better handling around promises?
+- better docs
+```
