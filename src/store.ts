@@ -142,3 +142,5 @@ export abstract class Store<
 		}
 	}
 }
+
+export default Store;
