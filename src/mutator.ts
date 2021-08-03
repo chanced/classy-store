@@ -9,7 +9,7 @@ export function mutator<T extends Store<T, E>, E = void>(
 	descriptor.value = function (...args) {
 		const result = method.apply(this, args);
 		if (result instanceof Promise) {
-			this.executing[key] = Execution.Pending;
+			this.executing[key] = Execution.Running;
 			result
 				.then(() => {
 					this.executing[key] = Execution.Resolved;

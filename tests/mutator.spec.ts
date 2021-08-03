@@ -68,7 +68,7 @@ mutators(
 					assert.is(mt.promiseResult, "is finished");
 					res();
 				}
-				if (mt.executing.aPromiseExample === Execution.Pending) {
+				if (mt.executing.aPromiseExample === Execution.Running) {
 					assert.is(false, pendingHasBeenSet);
 					pendingHasBeenSet = true;
 				}
@@ -91,7 +91,7 @@ mutators(
 		let errorHasBeenSet = false;
 		const res = new Promise<void>((res) => {
 			mt.subscribe(() => {
-				if (mt.executing.aPromiseExample === Execution.Pending) {
+				if (mt.executing.aPromiseExample === Execution.Running) {
 					// assert.is(false, pendingHasBeenSet);
 					pendingHasBeenSet = true;
 				}

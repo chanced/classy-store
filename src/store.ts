@@ -37,7 +37,7 @@ type Promises<D> = {
 };
 
 export enum Execution {
-	Pending = "pending",
+	Running = "running",
 	Resolved = "resolved",
 	Error = "error",
 }
