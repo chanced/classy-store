@@ -1,6 +1,6 @@
 # classy-store
 
-class stores for svelte. this is still a WIP.
+class stores for svelte. 
 
 ## Usage
 
@@ -87,9 +87,9 @@ name: string;
 
 #### errors
 
-The default error handler stores `_errors` in 
-a queue on your store. The max size a configurable by 
-setting `maxErrorsToStore` on `Options` passed to the `Store` constructor.
+The default error handler stores `_errors` in a queue on your store. 
+The max size a configurable by setting `maxErrorsToStore` on `Options` 
+passed to the `Store` constructor.
 
 
 #### Derived stores
@@ -139,12 +139,13 @@ You can update the store with a new instance or a partial of the fields:
 <button on:click={()=> { $spike.set({name:"..."})}}>
 ```
 
-Promises
-
 ## Notes
 
 Please feel free to create an issue for any question, feedback or bug you encounter.
 
+### Example REPL
+
+A [very simple, pure javascript REPL is available here](https://svelte.dev/repl/585cbc7da2554a578a1f4d7661116bd0?version=3.41.0).
 
 ### Dependencies
 
