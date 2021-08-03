@@ -61,8 +61,7 @@ name: string;
 
 #### @mutator
 
-`@mutator` is a simple wrapper around your method which executes 
-`store.broadcast` after your method is finished altering its state.
+`@mutator` is a wrapper around your method which executes `store.broadcast` after your method is finished altering its state.
 
 - If your method returns a `Promise`, `broadcast` is called immediately and as soon as the promise is resolved or rejected.
 - If a `Promise` is returned, `executing.{methodName}` is set to `Execution.Running`. 
@@ -83,7 +82,7 @@ name: string;
 ```
 
 
-If you do not wish to use `@mutator`, your methods need to invoke `broadcast()` after the store's state has been updated. 
+
 
 
 #### errors
