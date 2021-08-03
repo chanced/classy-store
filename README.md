@@ -60,6 +60,33 @@ export class Spike extends Store<Spike> {
 <button on:click={() => { $spike.delayed(); }}>level up</button>
 ```
 
+#### @mutator
+
+`@mutator` is a simple wrapper around your method. 
+It simply executes `store.broadcast` after your method has executed. 
+If your method returns a `Promise`, `broadcast` is is called after
+the promise has been resolved or rejected.
+
+- If your promise returns a `Promise`, the mutator sets `executing.{methodName}` to
+`ExecutingStatus.Pending` (`"pending"`). 
+- If the `Promise` resolves successfully,
+`executing.{methodName}` to `ExecutingStatus.Resolved` (`"resolved"`). 
+- If the `Promise` throws an error, `executing.{methodName}` is set to 
+`ExecutingStatus.Rejected` and an `"error"` event is emitted.
+
+
+```html
+<script lang="ts">
+	import { Spike } from '$lib/spike';
+	let spike = new Spike('this is a store');
+	let disabled = false
+	$: disabled = $spike.executing.delayed === "pending"
+</script>
+<button on:click={spike.delayed()} {disabled || undefined}>{$spike.count}</button>
+```
+
+#### Derived stores
+
 The stores can be derived:
 
 ```html
@@ -74,6 +101,7 @@ The stores can be derived:
 <input bind:value="{$spike.name}" />
 ```
 
+#### Custom Events
 The stores are event emitters although more work is needed on that front.
 
 If you wish to emit custom events, type your store such as:
@@ -90,6 +118,7 @@ class Spike extends Store<Spike, MyEvents> {
 	}
 }
 ```
+#### Partial updates
 
 You can update the store with a new instance or a partial of the fields:
 
@@ -102,6 +131,8 @@ You can update the store with a new instance or a partial of the fields:
 <h1>Hello {$spike.name}</h1>
 <button on:click={()=> { $spike.set({name:"..."})}}>
 ```
+
+Promises
 
 ## Notes
 
