@@ -67,11 +67,9 @@ It simply executes `store.broadcast` after your method has executed.
 If your method returns a `Promise`, `broadcast` is is called after
 the promise has been resolved or rejected.
 
-
 - If your method returns a `Promise`, the mutator sets `executing.{methodName}` to `ExecutingStatus.Pending`. 
 - If the `Promise` resolves successfully, `executing.{methodName}` is set to `ExecutingStatus.Resolved`. 
 - If the `Promise` throws an error, `executing.{methodName}` is set to  `ExecutingStatus.Rejected` and an `"error"` event is emitted. 
-
 
 ```html
 <script lang="ts">
@@ -82,6 +80,13 @@ the promise has been resolved or rejected.
 </script>
 <button on:click={spike.delayed()} {disabled || undefined}>{$spike.count}</button>
 ```
+
+
+#### errors
+
+The default error handler stores `errors` in a queue on your store, with a configurable max size 
+via the `maxErrorsToStore` property on `Options` passed to the `Store` constructor.
+
 
 #### Derived stores
 
