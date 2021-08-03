@@ -69,7 +69,7 @@ the promise has been resolved or rejected.
 
 
 - If your method returns a `Promise`, the mutator sets `executing.{methodName}` to `ExecutingStatus.Pending`. 
-- If the `Promise` resolves successfully, `executing.{methodName}` to `ExecutingStatus.Resolved`. 
+- If the `Promise` resolves successfully, `executing.{methodName}` is set to `ExecutingStatus.Resolved`. 
 - If the `Promise` throws an error, `executing.{methodName}` is set to  `ExecutingStatus.Rejected` and an `"error"` event is emitted. 
 
 
