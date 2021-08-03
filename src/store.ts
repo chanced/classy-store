@@ -77,8 +77,15 @@ export abstract class Store<T extends Store<T, E>, E = void> extends Base<
 			(this as any).emit("start", this);
 			return result;
 		};
-		this.maxErrorsToStore = options.maxErrorsToStore || 10;
-		this.setupErrorHandler(options);
+		if (options.maxErrorsToStore === undefined || options.maxErrorsToStore === null) {
+			this.maxErrorsToStore = 10;
+		} else if (this.maxErrorsToStore < 1) {
+			this.maxErrorsToStore = 0;
+		} else {
+			this.maxErrorsToStore = options.maxErrorsToStore;
+		}
+
+		this.setupErrorHandler();
 	}
 
 	set(value: Store<T, E> | PartialPayload<T>): void {
@@ -126,13 +133,15 @@ export abstract class Store<T extends Store<T, E>, E = void> extends Base<
 			}
 		}
 	}
-	private setupErrorHandler(opts: Options<T, E>) {
+	private setupErrorHandler() {
 		(this as any).on("error", (err) => {
-			if (this.errors.length === 0) {
+			if (this.maxErrorsToStore <= 0) {
 				return;
 			}
 			if (this.errors.length >= this.maxErrorsToStore) {
-				this.errors.shift();
+				while (this.errors.length >= this.maxErrorsToStore) {
+					this.errors.shift();
+				}
 			}
 			this.errors.push(err);
 			this.broadcast();
