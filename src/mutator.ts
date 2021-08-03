@@ -10,7 +10,7 @@ export function mutator<T extends Store<T, E>, E = void>(
 		const result = method.apply(this, args);
 		if (result instanceof Promise) {
 			this.executing[key] = Execution.Running;
-			this.broadcast()
+			this.broadcast();
 			result
 				.then(() => {
 					this.executing[key] = Execution.Resolved;
