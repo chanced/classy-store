@@ -20,7 +20,7 @@
 
 ### Type aliases
 
-- [Executiones](modules.md#executiones)
+- [Executions](modules.md#executions)
 - [Invalidator](modules.md#invalidator)
 - [PartialPayload](modules.md#partialpayload)
 - [ReservableKey](modules.md#reservablekey)
@@ -35,9 +35,9 @@
 
 ## Type aliases
 
-### Executiones
+### Executions
 
-Ƭ **Executiones**<`T`, `V`\>: `Partial`<{ [K in keyof V]: Execution}\>
+Ƭ **Executions**<`T`, `V`\>: `Partial`<{ [K in keyof V]: Execution}\>
 
 #### Type parameters
 
@@ -48,7 +48,7 @@
 
 #### Defined in
 
-[src/store.ts:45](https://github.com/chanced/classy-store/blob/12b6fd3/src/store.ts#L45)
+[src/store.ts:45](https://github.com/chanced/classy-store/blob/d28d2b5/src/store.ts#L45)
 
 ___
 
@@ -78,7 +78,7 @@ ___
 
 #### Defined in
 
-[src/store.ts:13](https://github.com/chanced/classy-store/blob/12b6fd3/src/store.ts#L13)
+[src/store.ts:13](https://github.com/chanced/classy-store/blob/d28d2b5/src/store.ts#L13)
 
 ___
 
@@ -94,7 +94,7 @@ ___
 
 #### Defined in
 
-[src/store.ts:195](https://github.com/chanced/classy-store/blob/12b6fd3/src/store.ts#L195)
+[src/store.ts:195](https://github.com/chanced/classy-store/blob/d28d2b5/src/store.ts#L195)
 
 ___
 
@@ -111,7 +111,7 @@ ___
 
 #### Defined in
 
-[src/store.ts:197](https://github.com/chanced/classy-store/blob/12b6fd3/src/store.ts#L197)
+[src/store.ts:197](https://github.com/chanced/classy-store/blob/d28d2b5/src/store.ts#L197)
 
 ___
 
@@ -141,7 +141,7 @@ ___
 
 #### Defined in
 
-[src/store.ts:14](https://github.com/chanced/classy-store/blob/12b6fd3/src/store.ts#L14)
+[src/store.ts:14](https://github.com/chanced/classy-store/blob/d28d2b5/src/store.ts#L14)
 
 ___
 
@@ -171,7 +171,7 @@ ___
 
 #### Defined in
 
-[src/store.ts:9](https://github.com/chanced/classy-store/blob/12b6fd3/src/store.ts#L9)
+[src/store.ts:9](https://github.com/chanced/classy-store/blob/d28d2b5/src/store.ts#L9)
 
 ___
 
@@ -189,7 +189,7 @@ ___
 
 #### Defined in
 
-[src/store.ts:11](https://github.com/chanced/classy-store/blob/12b6fd3/src/store.ts#L11)
+[src/store.ts:11](https://github.com/chanced/classy-store/blob/d28d2b5/src/store.ts#L11)
 
 ___
 
@@ -219,7 +219,7 @@ ___
 
 #### Defined in
 
-[src/store.ts:12](https://github.com/chanced/classy-store/blob/12b6fd3/src/store.ts#L12)
+[src/store.ts:12](https://github.com/chanced/classy-store/blob/d28d2b5/src/store.ts#L12)
 
 ## Functions
 
@@ -248,4 +248,4 @@ ___
 
 #### Defined in
 
-[src/mutator.ts:3](https://github.com/chanced/classy-store/blob/12b6fd3/src/mutator.ts#L3)
+[src/mutator.ts:3](https://github.com/chanced/classy-store/blob/d28d2b5/src/mutator.ts#L3)

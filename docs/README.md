@@ -26,15 +26,13 @@ name: string;
 		this.name = name;
 		this.count = count ?? 0;
 	}
-	@mutator // <-- wraps your method so that updates are fired appropriately
+	@mutator
 	inc(n = 1) {
 		this.count = this.count + n;
-		// if you do not use @mutator, you can also:
-		// this.broadcast()
 		return this.count;
 	}
 
-	@mutator // <-- works with promises too
+	@mutator
 	async delayed() {
 		await new Promise((res) => setTimeout(res, 500));
 		this.count + 100;
@@ -64,12 +62,13 @@ name: string;
 
 #### @mutator
 
-`@mutator` is a simple wrapper around your method which executes 
-`store.broadcast` after your method is finished altering its state.If your method returns a `Promise`, `broadcast` is called immediately and after the promise has been resolved or rejected.
+`@mutator` is a wrapper around your method which executes `store.broadcast` after your method is finished altering the store's state.
 
-- If the `Promise` he mutator sets `executing.{methodName}` to `Execution.Running`. 
-- If the `Promise` resolves successfully, `executing.{methodName}` is set to `Execution.Resolved`. 
-- If the `Promise` throws an error, `executing.{methodName}` is set to  `Execution.Rejected` and an `"error"` event is emitted. 
+- If your method returns a `Promise`, `broadcast` is called immediately and again when the promise is resolved or rejected.
+- If a `Promise` is returned, `executing[methodName]` is set to `Execution.Running`. 
+- If the `Promise` resolves successfully, `executing[methodName]` is set to `Execution.Resolved`. 
+- If the `Promise` is rejected, `executing[methodName]` is set to  `Execution.Rejected` 
+- If the `Promise` is rejected, an `"error"` event is emitted with the reason.
 
 ```html
 <script lang="ts">

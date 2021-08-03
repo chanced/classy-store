@@ -23,7 +23,7 @@
 
 ### Properties
 
-- [errors](Store.md#errors)
+- [\_errors](Store.md#_errors)
 - [executing](Store.md#executing)
 - [maxErrorsToStore](Store.md#maxerrorstostore)
 - [starter](Store.md#starter)
@@ -80,17 +80,17 @@ Base&lt;
 
 #### Defined in
 
-[src/store.ts:64](https://github.com/chanced/classy-store/blob/12b6fd3/src/store.ts#L64)
+[src/store.ts:64](https://github.com/chanced/classy-store/blob/d28d2b5/src/store.ts#L64)
 
 ## Properties
 
-### errors
+### \_errors
 
-• `Readonly` **errors**: `any`[]
+• **\_errors**: `any`[]
 
 #### Defined in
 
-[src/store.ts:62](https://github.com/chanced/classy-store/blob/12b6fd3/src/store.ts#L62)
+[src/store.ts:62](https://github.com/chanced/classy-store/blob/d28d2b5/src/store.ts#L62)
 
 ___
 
@@ -100,7 +100,7 @@ ___
 
 #### Defined in
 
-[src/store.ts:60](https://github.com/chanced/classy-store/blob/12b6fd3/src/store.ts#L60)
+[src/store.ts:60](https://github.com/chanced/classy-store/blob/d28d2b5/src/store.ts#L60)
 
 ___
 
@@ -110,7 +110,7 @@ ___
 
 #### Defined in
 
-[src/store.ts:58](https://github.com/chanced/classy-store/blob/12b6fd3/src/store.ts#L58)
+[src/store.ts:58](https://github.com/chanced/classy-store/blob/d28d2b5/src/store.ts#L58)
 
 ___
 
@@ -120,7 +120,7 @@ ___
 
 #### Defined in
 
-[src/store.ts:55](https://github.com/chanced/classy-store/blob/12b6fd3/src/store.ts#L55)
+[src/store.ts:55](https://github.com/chanced/classy-store/blob/d28d2b5/src/store.ts#L55)
 
 ___
 
@@ -130,7 +130,7 @@ ___
 
 #### Defined in
 
-[src/store.ts:57](https://github.com/chanced/classy-store/blob/12b6fd3/src/store.ts#L57)
+[src/store.ts:57](https://github.com/chanced/classy-store/blob/d28d2b5/src/store.ts#L57)
 
 ___
 
@@ -140,7 +140,7 @@ ___
 
 #### Defined in
 
-[src/store.ts:54](https://github.com/chanced/classy-store/blob/12b6fd3/src/store.ts#L54)
+[src/store.ts:54](https://github.com/chanced/classy-store/blob/d28d2b5/src/store.ts#L54)
 
 ## Methods
 
@@ -185,7 +185,7 @@ ___
 
 #### Defined in
 
-[src/store.ts:127](https://github.com/chanced/classy-store/blob/12b6fd3/src/store.ts#L127)
+[src/store.ts:127](https://github.com/chanced/classy-store/blob/d28d2b5/src/store.ts#L127)
 
 ___
 
@@ -578,7 +578,7 @@ ___
 
 #### Defined in
 
-[src/store.ts:91](https://github.com/chanced/classy-store/blob/12b6fd3/src/store.ts#L91)
+[src/store.ts:91](https://github.com/chanced/classy-store/blob/d28d2b5/src/store.ts#L91)
 
 ___
 
@@ -616,7 +616,7 @@ ___
 
 #### Defined in
 
-[src/store.ts:136](https://github.com/chanced/classy-store/blob/12b6fd3/src/store.ts#L136)
+[src/store.ts:136](https://github.com/chanced/classy-store/blob/d28d2b5/src/store.ts#L136)
 
 ___
 
@@ -637,7 +637,7 @@ ___
 
 #### Defined in
 
-[src/store.ts:108](https://github.com/chanced/classy-store/blob/12b6fd3/src/store.ts#L108)
+[src/store.ts:108](https://github.com/chanced/classy-store/blob/d28d2b5/src/store.ts#L108)
 
 ___
 
@@ -657,4 +657,4 @@ ___
 
 #### Defined in
 
-[src/store.ts:100](https://github.com/chanced/classy-store/blob/12b6fd3/src/store.ts#L100)
+[src/store.ts:100](https://github.com/chanced/classy-store/blob/d28d2b5/src/store.ts#L100)

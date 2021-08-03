@@ -87,8 +87,9 @@ name: string;
 
 #### errors
 
-The default error handler stores `errors` in a queue on your store, with a configurable max size 
-via the `maxErrorsToStore` property on `Options` passed to the `Store` constructor.
+The default error handler stores `_errors` in 
+a queue on your store. The max size a configurable by 
+setting `maxErrorsToStore` on `Options` passed to the `Store` constructor.
 
 
 #### Derived stores

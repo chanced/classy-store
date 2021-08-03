@@ -59,7 +59,7 @@ export abstract class Store<T extends Store<T, E>, E = void> extends Base<
 
 	readonly executing: Executions<T>;
 
-	readonly errors: Array<any>;
+	_errors: Array<any>;
 
 	constructor(options?: Options<T, E> | StartStopNotifier<T>) {
 		super();
@@ -69,7 +69,7 @@ export abstract class Store<T extends Store<T, E>, E = void> extends Base<
 		this.executing = {};
 		options = options || {};
 		this.subscribers = new Set();
-		this.errors = new Array(0);
+		this._errors = new Array(0);
 		this.unsubscriber = null;
 		const startStop: StartStopNotifier<T> = options.startStopNotifier || noop;
 		this.starter = (sub) => {
@@ -138,12 +138,12 @@ export abstract class Store<T extends Store<T, E>, E = void> extends Base<
 			if (this.maxErrorsToStore <= 0) {
 				return;
 			}
-			if (this.errors.length >= this.maxErrorsToStore) {
-				while (this.errors.length >= this.maxErrorsToStore) {
-					this.errors.shift();
+			if (this._errors.length >= this.maxErrorsToStore) {
+				while (this._errors.length >= this.maxErrorsToStore) {
+					this._errors.shift();
 				}
 			}
-			this.errors.push(err);
+			this._errors.push(err);
 			this.broadcast();
 		});
 	}
@@ -224,7 +224,6 @@ function removeReserved(value: any): any {
 		getMaxListeners,
 		setMaxListeners,
 		unsubscriber,
-		proto,
 		...res
 	} = val;
 	/* eslint-enable @typescript-eslint/no-unused-vars */
