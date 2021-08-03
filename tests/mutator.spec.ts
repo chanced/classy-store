@@ -1,6 +1,6 @@
 import * as assert from "uvu/assert";
 import { suite } from "uvu";
-import { Store, mutator, ExecutingStatus } from "../src/index";
+import { Store, mutator, Execution } from "../src/index";
 
 class MutatorTest extends Store<MutatorTest> {
 	name: string;
@@ -68,11 +68,11 @@ mutators(
 					assert.is(mt.promiseResult, "is finished");
 					res();
 				}
-				if (mt.executing.aPromiseExample === ExecutingStatus.Pending) {
+				if (mt.executing.aPromiseExample === Execution.Pending) {
 					assert.is(false, pendingHasBeenSet);
 					pendingHasBeenSet = true;
 				}
-				if (mt.executing.aPromiseExample === ExecutingStatus.Resolved) {
+				if (mt.executing.aPromiseExample === Execution.Resolved) {
 					assert.is(false, resolvedHasBeenSet);
 					resolvedHasBeenSet = true;
 				}
@@ -91,11 +91,11 @@ mutators(
 		let errorHasBeenSet = false;
 		const res = new Promise<void>((res) => {
 			mt.subscribe(() => {
-				if (mt.executing.aPromiseExample === ExecutingStatus.Pending) {
+				if (mt.executing.aPromiseExample === Execution.Pending) {
 					// assert.is(false, pendingHasBeenSet);
 					pendingHasBeenSet = true;
 				}
-				if (mt.executing.aPromiseExample === ExecutingStatus.Error) {
+				if (mt.executing.aPromiseExample === Execution.Error) {
 					// assert.is(false, errorHasBeenSet);
 					errorHasBeenSet = true;
 					res();

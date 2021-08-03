@@ -36,15 +36,15 @@ type Promises<D> = {
 		: never]: D[K] extends (..._: never[]) => infer P ? P : never;
 };
 
-export enum ExecutingStatus {
+export enum Execution {
 	Pending = "pending",
 	Resolved = "resolved",
 	Error = "error",
 }
 
-export type ExecutingStatuses<T, V = Promises<T>> = Partial<
+export type Executiones<T, V = Promises<T>> = Partial<
 	{
-		[K in keyof V]: ExecutingStatus;
+		[K in keyof V]: Execution;
 	}
 >;
 
@@ -57,7 +57,7 @@ export abstract class Store<T extends Store<T, E>, E = void> extends Base<
 	protected subscribers: Set<SubscribeInvalidateTuple<T>>;
 	protected maxErrorsToStore: number;
 
-	readonly executing: ExecutingStatuses<T>;
+	readonly executing: Executiones<T>;
 
 	readonly errors: Array<any>;
 

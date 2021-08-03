@@ -2,7 +2,7 @@ classy-store / [Exports](modules.md)
 
 # classy-store
 
-class stores for svelte. this is very much a WIP.
+class stores for svelte. this is still a WIP.
 
 ## Usage
 
@@ -62,6 +62,35 @@ export class Spike extends Store<Spike> {
 <button on:click={() => { $spike.delayed(); }}>level up</button>
 ```
 
+#### @mutator
+
+`@mutator` is a simple wrapper around your method. 
+It simply executes `store.broadcast` after your method has executed. 
+If your method returns a `Promise`, `broadcast` is is called after
+the promise has been resolved or rejected.
+
+- If your method returns a `Promise`, the mutator sets `executing.{methodName}` to `Execution.Pending`. 
+- If the `Promise` resolves successfully, `executing.{methodName}` is set to `Execution.Resolved`. 
+- If the `Promise` throws an error, `executing.{methodName}` is set to  `Execution.Rejected` and an `"error"` event is emitted. 
+
+```html
+<script lang="ts">
+	import { Spike } from '$lib/spike';
+	import { Execution } from 'classy-store'
+	let spike = new Spike('this is a store');
+	let disabled = false
+	$: disabled = $spike.executing.delayed === Execution.Pending
+</script>
+<button on:click={spike.delayed()} {disabled || undefined}>{$spike.count}</button>
+```
+
+#### errors
+
+The default error handler stores `errors` in a queue on your store, with a configurable max size 
+via the `maxErrorsToStore` property on `Options` passed to the `Store` constructor.
+
+#### Derived stores
+
 The stores can be derived:
 
 ```html
@@ -76,6 +105,7 @@ The stores can be derived:
 <input bind:value="{$spike.name}" />
 ```
 
+#### Custom Events
 The stores are event emitters although more work is needed on that front.
 
 If you wish to emit custom events, type your store such as:
@@ -92,6 +122,7 @@ class Spike extends Store<Spike, MyEvents> {
 	}
 }
 ```
+#### Partial updates
 
 You can update the store with a new instance or a partial of the fields:
 
@@ -104,6 +135,8 @@ You can update the store with a new instance or a partial of the fields:
 <h1>Hello {$spike.name}</h1>
 <button on:click={()=> { $spike.set({name:"..."})}}>
 ```
+
+Promises
 
 ## Notes
 

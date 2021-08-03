@@ -67,16 +67,17 @@ It simply executes `store.broadcast` after your method has executed.
 If your method returns a `Promise`, `broadcast` is is called after
 the promise has been resolved or rejected.
 
-- If your method returns a `Promise`, the mutator sets `executing.{methodName}` to `ExecutingStatus.Pending`. 
-- If the `Promise` resolves successfully, `executing.{methodName}` is set to `ExecutingStatus.Resolved`. 
-- If the `Promise` throws an error, `executing.{methodName}` is set to  `ExecutingStatus.Rejected` and an `"error"` event is emitted. 
+- If your method returns a `Promise`, the mutator sets `executing.{methodName}` to `Execution.Pending`. 
+- If the `Promise` resolves successfully, `executing.{methodName}` is set to `Execution.Resolved`. 
+- If the `Promise` throws an error, `executing.{methodName}` is set to  `Execution.Rejected` and an `"error"` event is emitted. 
 
 ```html
 <script lang="ts">
 	import { Spike } from '$lib/spike';
+	import { Execution } from 'classy-store'
 	let spike = new Spike('this is a store');
 	let disabled = false
-	$: disabled = $spike.executing.delayed === "pending"
+	$: disabled = $spike.executing.delayed === Execution.Pending
 </script>
 <button on:click={spike.delayed()} {disabled || undefined}>{$spike.count}</button>
 ```

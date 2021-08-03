@@ -25,7 +25,7 @@
 
 #### Defined in
 
-[src/store.ts:18](https://github.com/chanced/classy-store/blob/c266642/src/store.ts#L18)
+[src/store.ts:18](https://github.com/chanced/classy-store/blob/e54df1f/src/store.ts#L18)
 
 ___
 
@@ -35,7 +35,7 @@ ___
 
 #### Defined in
 
-[src/store.ts:17](https://github.com/chanced/classy-store/blob/c266642/src/store.ts#L17)
+[src/store.ts:17](https://github.com/chanced/classy-store/blob/e54df1f/src/store.ts#L17)
 
 ___
 
@@ -45,4 +45,4 @@ ___
 
 #### Defined in
 
-[src/store.ts:16](https://github.com/chanced/classy-store/blob/c266642/src/store.ts#L16)
+[src/store.ts:16](https://github.com/chanced/classy-store/blob/e54df1f/src/store.ts#L16)

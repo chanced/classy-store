@@ -1,4 +1,4 @@
-import { ExecutingStatus, Store } from "./store";
+import { Execution, Store } from "./store";
 
 export function mutator<T extends Store<T, E>, E = void>(
 	target: T,
@@ -9,15 +9,15 @@ export function mutator<T extends Store<T, E>, E = void>(
 	descriptor.value = function (...args) {
 		const result = method.apply(this, args);
 		if (result instanceof Promise) {
-			this.executing[key] = ExecutingStatus.Pending;
+			this.executing[key] = Execution.Pending;
 			result
 				.then(() => {
-					this.executing[key] = ExecutingStatus.Resolved;
+					this.executing[key] = Execution.Resolved;
 					this.emit("update", this);
 					this.broadcast();
 				})
 				.catch((err) => {
-					this.executing[key] = ExecutingStatus.Error;
+					this.executing[key] = Execution.Error;
 					this.emit("error", err);
 					this.broadcast();
 				});
