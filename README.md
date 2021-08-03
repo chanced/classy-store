@@ -61,13 +61,13 @@ name: string;
 
 #### @mutator
 
-`@mutator` is a wrapper around your method which executes `store.broadcast` after your method is finished altering its state.
+`@mutator` is a wrapper around your method which executes `store.broadcast` after your method is finished altering the store's state.
 
 - If your method returns a `Promise`, `broadcast` is called immediately and as soon as the promise is resolved or rejected.
 - If a `Promise` is returned, `executing[methodName]` is set to `Execution.Running`. 
-- If the `Promise` resolves successfully, `executing[methodName}` is set to `Execution.Resolved`. 
-- If the `Promise` throws an error, `executing[methodName]` is set to  `Execution.Rejected` 
-- If the `Promise` throws an error, an `"error"` event is emitted with the error. 
+- If the `Promise` resolves successfully, `executing[methodName]` is set to `Execution.Resolved`. 
+- If the `Promise` is rejected, `executing[methodName]` is set to  `Execution.Rejected` 
+- If the `Promise` is rejected, an `"error"` event is emitted with the reason.
 
 
 ```html
