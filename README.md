@@ -68,8 +68,8 @@ name: string;
 - If your method returns a `Promise`, `broadcast` is called immediately and as soon as the promise is resolved or rejected.
 - If a `Promise` is returned, `executing.{methodName}` is set to `Execution.Running`. 
 - If the `Promise` resolves successfully, `executing.{methodName}` is set to `Execution.Resolved`. 
-- If the `Promise` throws an error, `executing.{methodName}` is set to  `Execution.Rejected` and an `"error"` event is emitted. 
-
+- If the `Promise` throws an error, `executing.{methodName}` is set to  `Execution.Rejected` 
+- If the `Promise` throws an error, an `"error"` event is emitted with the error. 
 ```html
 <script lang="ts">
 	import { Spike } from '$lib/spike';
