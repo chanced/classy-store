@@ -145,7 +145,7 @@ Please feel free to create an issue for any question, feedback or bug you encoun
 
 ### Example REPL
 
-A [very simple, pure javascript REPL is available here](https://svelte.dev/repl/585cbc7da2554a578a1f4d7661116bd0?version=3.41.0).
+A [very simple javascript REPL is available here](https://svelte.dev/repl/585cbc7da2554a578a1f4d7661116bd0?version=3.41.0).
 
 ### Dependencies
 
