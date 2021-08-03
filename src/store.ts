@@ -12,6 +12,11 @@ export declare type Unsubscriber = () => void;
 export declare type Updater<T> = (value: T) => T;
 export declare type Invalidator<T> = (value?: T) => void;
 export type StartStopNotifier<T> = (set: Subscriber<T>) => Unsubscriber | void;
+export interface Options<T extends Store<T, E> = Store<any>, E = void> {
+	startStopNotifier?: StartStopNotifier<T>;
+	protectedFields?: ReservableKey<T, E>[];
+	maxErrorsToStore?: number;
+}
 
 class Base<T> extends (EventEmitter as { new <T>(): TypedEmitter<T> })<T> {
 	constructor() {
@@ -50,8 +55,11 @@ export abstract class Store<T extends Store<T, E>, E = void> extends Base<
 	private readonly starter: StartStopNotifier<T>;
 
 	protected subscribers: Set<SubscribeInvalidateTuple<T>>;
+	protected maxErrorsToStore: number;
 
 	readonly executing: ExecutingStatuses<T>;
+
+	readonly errors: Array<any>;
 
 	constructor(options?: Options<T, E> | StartStopNotifier<T>) {
 		super();
@@ -61,6 +69,7 @@ export abstract class Store<T extends Store<T, E>, E = void> extends Base<
 		this.executing = {};
 		options = options || {};
 		this.subscribers = new Set();
+		this.errors = new Array(0);
 		this.unsubscriber = null;
 		const startStop: StartStopNotifier<T> = options.startStopNotifier || noop;
 		this.starter = (sub) => {
@@ -68,6 +77,8 @@ export abstract class Store<T extends Store<T, E>, E = void> extends Base<
 			(this as any).emit("start", this);
 			return result;
 		};
+		this.maxErrorsToStore = options.maxErrorsToStore || 10;
+		this.setupErrorHandler(options);
 	}
 
 	set(value: Store<T, E> | PartialPayload<T>): void {
@@ -114,6 +125,18 @@ export abstract class Store<T extends Store<T, E>, E = void> extends Base<
 				subscriber[run](this as any as T);
 			}
 		}
+	}
+	private setupErrorHandler(opts: Options<T, E>) {
+		(this as any).on("error", (err) => {
+			if(this.errors.length === 0) {
+				return
+			}
+			if (this.errors.length >= this.maxErrorsToStore) {
+				this.errors.shift();
+			}
+			this.errors.push(err);
+			this.broadcast();
+		});
 	}
 }
 
@@ -163,11 +186,6 @@ export interface Events<T extends Store<T, E>, E = void> {
 export type PartialPayload<T> = Omit<Partial<T>, ReservedKeys>;
 
 export type ReservableKey<T extends Store<T, E>, E = void> = Exclude<keyof T, ReservedKeys>;
-
-export interface Options<T extends Store<T, E> = Store<any>, E = void> {
-	startStopNotifier?: StartStopNotifier<T>;
-	protectedFields?: ReservableKey<T, E>[];
-}
 
 export default Store;
 
