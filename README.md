@@ -24,13 +24,13 @@ name: string;
 		this.name = name;
 		this.count = count ?? 0;
 	}
-	@mutator // <-- wraps your method so that updates are fired appropriately
+	@mutator
 	inc(n = 1) {
 		this.count = this.count + n;
 		return this.count;
 	}
 
-	@mutator // <-- works with promises too
+	@mutator
 	async delayed() {
 		await new Promise((res) => setTimeout(res, 500));
 		this.count + 100;
@@ -38,7 +38,6 @@ name: string;
 }
 ```
 
-If you do not wish to use `@mutator`, your methods need to invoke `broadcast()` after the store's state has been updated. 
 
 ### Use the store
 
@@ -70,6 +69,10 @@ If you do not wish to use `@mutator`, your methods need to invoke `broadcast()` 
 - If the `Promise` resolves successfully, `executing.{methodName}` is set to `Execution.Resolved`. 
 - If the `Promise` throws an error, `executing.{methodName}` is set to  `Execution.Rejected` 
 - If the `Promise` throws an error, an `"error"` event is emitted with the error. 
+
+If you do not wish to use `@mutator`, your methods need to invoke `broadcast()` after the store's state has been updated. 
+
+
 ```html
 <script lang="ts">
 	import { Spike } from '$lib/spike';
