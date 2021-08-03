@@ -42,7 +42,7 @@ export enum Execution {
 	Error = "error",
 }
 
-export type Executiones<T, V = Promises<T>> = Partial<
+export type Executions<T, V = Promises<T>> = Partial<
 	{
 		[K in keyof V]: Execution;
 	}
@@ -57,7 +57,7 @@ export abstract class Store<T extends Store<T, E>, E = void> extends Base<
 	protected subscribers: Set<SubscribeInvalidateTuple<T>>;
 	protected maxErrorsToStore: number;
 
-	readonly executing: Executiones<T>;
+	readonly executing: Executions<T>;
 
 	readonly errors: Array<any>;
 
