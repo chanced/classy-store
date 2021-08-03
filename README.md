@@ -70,8 +70,6 @@ name: string;
 - If the `Promise` throws an error, `executing.{methodName}` is set to  `Execution.Rejected` 
 - If the `Promise` throws an error, an `"error"` event is emitted with the error. 
 
-If you do not wish to use `@mutator`, your methods need to invoke `broadcast()` after the store's state has been updated. 
-
 
 ```html
 <script lang="ts">
@@ -83,6 +81,9 @@ If you do not wish to use `@mutator`, your methods need to invoke `broadcast()` 
 </script>
 <button on:click={spike.delayed()} {disabled || undefined}>{$spike.count}</button>
 ```
+
+
+If you do not wish to use `@mutator`, your methods need to invoke `broadcast()` after the store's state has been updated. 
 
 
 #### errors
