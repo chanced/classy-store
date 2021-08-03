@@ -17,7 +17,7 @@ You must enable `experimentalDecorators` in your tsconfig to use the `@mutator` 
 ```typescript
 import { mutator, Store } from "classy-store";
 export class Spike extends Store<Spike> {
-name: string;
+	name: string;
 	count: number;
 	constructor(name: string, count?: number) {
 		super();
