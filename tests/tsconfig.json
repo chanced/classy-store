@@ -3,9 +3,7 @@
 		"moduleResolution": "node",
 		"module": "es2020",
 		"experimentalDecorators": true,
-		"lib": [
-			"es2020"
-		],
+		"lib": ["es2020"],
 		"target": "ES2015",
 		"importsNotUsedAsValues": "error",
 		"isolatedModules": true,
@@ -19,14 +17,8 @@
 		"declaration": true,
 		"declarationDir": "dist/dts"
 	},
-	"include": [
-		"**/*.ts",
-	],
-	"exclude": [
-		"node_modules",
-		"dist",
-		"rollup.config.js"
-	],
+	"include": ["**/*.ts"],
+	"exclude": ["node_modules", "dist", "rollup.config.js"],
 	"ts-node": {
 		"transpileOnly": true,
 		"compilerOptions": {
@@ -45,9 +37,6 @@
 			"declaration": true,
 			"declarationDir": "dist/dts"
 		},
-		"include": [
-			"*.ts",
-			"*.ts"
-		]
-	},
+		"include": ["*.ts", "*.ts"]
+	}
 }

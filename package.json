@@ -1,6 +1,6 @@
 {
 	"name": "classy-store",
-	"version": "0.0.2",
+	"version": "0.0.3",
 	"description": "class based stores for svelte",
 	"main": "dist/index.js",
 	"types": "dist/index.d.ts",
@@ -25,7 +25,8 @@
 		"watch": "concurrently 'npm:watch:*'",
 		"prepublishOnly": "npm run clean && npm run lint && npm test && npm run build && npm run docs",
 		"test:coverage": "c8 --include=src npm test",
-		"test:report": "c8 report --reporter=text-lcov > coverage.lcov"
+		"test:report": "c8 report --reporter=text-lcov > coverage.lcov",
+		"docs": "typedoc src/index.ts"
 	},
 	"repository": {
 		"type": "git",

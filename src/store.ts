@@ -128,8 +128,8 @@ export abstract class Store<T extends Store<T, E>, E = void> extends Base<
 	}
 	private setupErrorHandler(opts: Options<T, E>) {
 		(this as any).on("error", (err) => {
-			if(this.errors.length === 0) {
-				return
+			if (this.errors.length === 0) {
+				return;
 			}
 			if (this.errors.length >= this.maxErrorsToStore) {
 				this.errors.shift();
