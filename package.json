@@ -23,7 +23,7 @@
 		"clean:docs": "rimraf docs/**/*.md",
 		"clean": "concurrently 'npm:clean:*'",
 		"watch": "concurrently 'npm:watch:*'",
-		"prepublishOnly": "npm run clean && npm run lint && format && && npm test && npm run build && npm run docs",
+		"prepublishOnly": "npm run clean && npm run lint && npm run format && npm test && npm run build && npm run docs",
 		"test:coverage": "c8 --include=src npm test",
 		"test:report": "c8 report --reporter=text-lcov > coverage.lcov",
 		"docs": "typedoc src/index.ts"
