@@ -17,7 +17,7 @@ You must enable `experimentalDecorators` in your tsconfig to use the `@mutator` 
 ```typescript
 import { mutator, Store } from "classy-store";
 export class Spike extends Store<Spike> {
-	name: string;
+name: string;
 	count: number;
 	constructor(name: string, count?: number) {
 		super();
@@ -63,11 +63,9 @@ export class Spike extends Store<Spike> {
 #### @mutator
 
 `@mutator` is a simple wrapper around your method which executes 
-`store.broadcast` after your method is finished altering its state.
-If your method returns a `Promise`, `broadcast` is called after
-the promise is resolved or rejected.
+`store.broadcast` after your method is finished altering its state.If your method returns a `Promise`, `broadcast` is called immediately and after the promise has been resolved or rejected.
 
-- If your method returns a `Promise`, the mutator sets `executing.{methodName}` to `Execution.Running`. 
+- If the `Promise` he mutator sets `executing.{methodName}` to `Execution.Running`. 
 - If the `Promise` resolves successfully, `executing.{methodName}` is set to `Execution.Resolved`. 
 - If the `Promise` throws an error, `executing.{methodName}` is set to  `Execution.Rejected` and an `"error"` event is emitted. 
 
@@ -140,6 +138,9 @@ Promises
 
 ## Notes
 
+Please feel free to create an issue for any question, feedback or bug you encounter.
+
+
 ### Dependencies
 
 -   [typed-emitter](https://github.com/andywer/typed-emitter)
@@ -149,5 +150,7 @@ Promises
 
 -   better name
 -   tests
--   better handling around promises?
 -   better docs
+
+## License
+MIT
