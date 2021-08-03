@@ -27,8 +27,6 @@ name: string;
 	@mutator // <-- wraps your method so that updates are fired appropriately
 	inc(n = 1) {
 		this.count = this.count + n;
-		// if you do not use @mutator, you can also:
-		// this.broadcast()
 		return this.count;
 	}
 
@@ -39,6 +37,8 @@ name: string;
 	}
 }
 ```
+
+If you do not wish to use `@mutator`, your methods need to invoke `broadcast()` after the store's state has been updated. 
 
 ### Use the store
 
