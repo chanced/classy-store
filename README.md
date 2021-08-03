@@ -62,10 +62,10 @@ export class Spike extends Store<Spike> {
 
 #### @mutator
 
-`@mutator` is a simple wrapper around your method. 
-It simply executes `store.broadcast` after your method has executed. 
-If your method returns a `Promise`, `broadcast` is is called after
-the promise has been resolved or rejected.
+`@mutator` is a simple wrapper around your method which executes 
+`store.broadcast` after your method is finished altering its state.
+If your method returns a `Promise`, `broadcast` is called after
+the promise is resolved or rejected.
 
 - If your method returns a `Promise`, the mutator sets `executing.{methodName}` to `Execution.Running`. 
 - If the `Promise` resolves successfully, `executing.{methodName}` is set to `Execution.Resolved`. 
