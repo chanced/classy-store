@@ -1,6 +1,6 @@
 # classy-store
 
-class stores for svelte. this is very much a WIP.
+class stores for svelte. this is still a WIP.
 
 ## Usage
 
@@ -67,10 +67,11 @@ It simply executes `store.broadcast` after your method has executed.
 If your method returns a `Promise`, `broadcast` is is called after
 the promise has been resolved or rejected.
 
-If your promise returns a `Promise`, the mutator sets `executing.{methodName}` to
-`ExecutingStatus.Pending` (`"pending"`). If the `Promise` resolves successfully,
-`executing.{methodName}` to `ExecutingStatus.Resolved` (`"resolved"`). If the `Promise` throws an error, `executing.{methodName}` is set to 
-`ExecutingStatus.Rejected` and an `"error"` event is emitted.
+|  |
+| --- |
+| If your method returns a `Promise`, the mutator sets `executing.{methodName}` to `ExecutingStatus.Pending` (`"pending"`). |
+| If the `Promise` resolves successfully, `executing.{methodName}` to `ExecutingStatus.Resolved` (`"resolved"`). |
+| If the `Promise` throws an error, `executing.{methodName}` is set to  `ExecutingStatus.Rejected` and an `"error"` event is emitted. |
 
 
 ```html
