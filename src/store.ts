@@ -199,11 +199,34 @@ export type ReservableKey<T extends Store<T, E>, E = void> = Exclude<keyof T, Re
 export default Store;
 
 function removeReserved(value: any): any {
-	const val = { ...(value || {}) };
-	for (const key of Object.keys(value) as ReservedKeys[]) {
-		if (protectedFields.includes(key)) {
-			delete val[key];
-		}
-	}
-	return val;
+	const val = typeof value === "object" ? value : {};
+	/* eslint-disable @typescript-eslint/no-unused-vars */
+	const {
+		subscribers,
+		set,
+		subscribe,
+		broadcast,
+		update,
+		addListener,
+		defaultMaxListeners,
+		prependListener,
+		prependOnceListener,
+		removeListener,
+		removeAllListeners,
+		once,
+		on,
+		off,
+		emit,
+		eventNames,
+		listenerCount,
+		listeners,
+		rawListeners,
+		getMaxListeners,
+		setMaxListeners,
+		unsubscriber,
+		proto,
+		...res
+	} = val;
+	/* eslint-enable @typescript-eslint/no-unused-vars */
+	return res;
 }
