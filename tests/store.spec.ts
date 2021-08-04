@@ -20,12 +20,11 @@ emitters("should fire 'start' after the first subscription", async () => {
 	const t = new Test1();
 	let beforeSubscribe = true;
 	const res = new Promise<void>((resolve) => {
-		t.on("start", () => {
+		t.on("start", ({ store }) => {
 			console.log("received start event");
 			assert.equal(beforeSubscribe, true, "should not start until after subscribe");
 			resolve();
 		});
-		t.on("start", ({ store, type }) => {});
 	});
 	t.subscribe((t1) => {
 		console.log("firing subscribe");
