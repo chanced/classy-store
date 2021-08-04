@@ -10,7 +10,6 @@ export declare type Subscriber<T> = (value: T) => void;
 export interface Event<T extends Store<T, E>, E = void> {
 	type: string;
 	store: T;
-	occured;
 }
 
 export interface ErrorEvent<T extends Store<T, E>, E = void, X = any> extends Event<T, E> {

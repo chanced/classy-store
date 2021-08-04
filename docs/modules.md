@@ -15,6 +15,8 @@
 
 ### Interfaces
 
+- [ErrorEvent](interfaces/ErrorEvent.md)
+- [Event](interfaces/Event.md)
 - [Events](interfaces/Events.md)
 - [Options](interfaces/Options.md)
 
@@ -48,7 +50,7 @@
 
 #### Defined in
 
-[src/store.ts:45](https://github.com/chanced/classy-store/blob/d28d2b5/src/store.ts#L45)
+[src/store.ts:60](https://github.com/chanced/classy-store/blob/0f71bdc/src/store.ts#L60)
 
 ___
 
@@ -78,7 +80,7 @@ ___
 
 #### Defined in
 
-[src/store.ts:13](https://github.com/chanced/classy-store/blob/d28d2b5/src/store.ts#L13)
+[src/store.ts:28](https://github.com/chanced/classy-store/blob/0f71bdc/src/store.ts#L28)
 
 ___
 
@@ -94,7 +96,7 @@ ___
 
 #### Defined in
 
-[src/store.ts:195](https://github.com/chanced/classy-store/blob/d28d2b5/src/store.ts#L195)
+[src/store.ts:207](https://github.com/chanced/classy-store/blob/0f71bdc/src/store.ts#L207)
 
 ___
 
@@ -111,7 +113,7 @@ ___
 
 #### Defined in
 
-[src/store.ts:197](https://github.com/chanced/classy-store/blob/d28d2b5/src/store.ts#L197)
+[src/store.ts:209](https://github.com/chanced/classy-store/blob/0f71bdc/src/store.ts#L209)
 
 ___
 
@@ -141,7 +143,7 @@ ___
 
 #### Defined in
 
-[src/store.ts:14](https://github.com/chanced/classy-store/blob/d28d2b5/src/store.ts#L14)
+[src/store.ts:29](https://github.com/chanced/classy-store/blob/0f71bdc/src/store.ts#L29)
 
 ___
 
@@ -171,7 +173,7 @@ ___
 
 #### Defined in
 
-[src/store.ts:9](https://github.com/chanced/classy-store/blob/d28d2b5/src/store.ts#L9)
+[src/store.ts:8](https://github.com/chanced/classy-store/blob/0f71bdc/src/store.ts#L8)
 
 ___
 
@@ -189,7 +191,7 @@ ___
 
 #### Defined in
 
-[src/store.ts:11](https://github.com/chanced/classy-store/blob/d28d2b5/src/store.ts#L11)
+[src/store.ts:26](https://github.com/chanced/classy-store/blob/0f71bdc/src/store.ts#L26)
 
 ___
 
@@ -219,7 +221,7 @@ ___
 
 #### Defined in
 
-[src/store.ts:12](https://github.com/chanced/classy-store/blob/d28d2b5/src/store.ts#L12)
+[src/store.ts:27](https://github.com/chanced/classy-store/blob/0f71bdc/src/store.ts#L27)
 
 ## Functions
 
@@ -248,4 +250,4 @@ ___
 
 #### Defined in
 
-[src/mutator.ts:3](https://github.com/chanced/classy-store/blob/d28d2b5/src/mutator.ts#L3)
+[src/mutator.ts:3](https://github.com/chanced/classy-store/blob/0f71bdc/src/mutator.ts#L3)

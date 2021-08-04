@@ -2,7 +2,7 @@ classy-store / [Exports](modules.md)
 
 # classy-store
 
-class stores for svelte. this is still a WIP.
+class stores for svelte. 
 
 ## Usage
 
@@ -19,7 +19,7 @@ You must enable `experimentalDecorators` in your tsconfig to use the `@mutator` 
 ```typescript
 import { mutator, Store } from "classy-store";
 export class Spike extends Store<Spike> {
-name: string;
+	name: string;
 	count: number;
 	constructor(name: string, count?: number) {
 		super();
@@ -83,8 +83,9 @@ name: string;
 
 #### errors
 
-The default error handler stores `errors` in a queue on your store, with a configurable max size 
-via the `maxErrorsToStore` property on `Options` passed to the `Store` constructor.
+The default error handler stores `_errors` in a queue on your store. 
+The max size a configurable by setting `maxErrorsToStore` on `Options` 
+passed to the `Store` constructor.
 
 #### Derived stores
 
@@ -133,11 +134,13 @@ You can update the store with a new instance or a partial of the fields:
 <button on:click={()=> { $spike.set({name:"..."})}}>
 ```
 
-Promises
-
 ## Notes
 
 Please feel free to create an issue for any question, feedback or bug you encounter.
+
+### Example REPL
+
+A [very simple javascript REPL is available here](https://svelte.dev/repl/585cbc7da2554a578a1f4d7661116bd0?version=3.41.0).
 
 ### Dependencies
 
