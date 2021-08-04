@@ -5,8 +5,23 @@
 
 import type { default as TypedEmitter } from "typed-emitter";
 import EventEmitter from "events";
-
 export declare type Subscriber<T> = (value: T) => void;
+
+export interface Event<T extends Store<T, E>, E = void> {
+	type: string;
+	store: T;
+	occured;
+}
+
+export interface ErrorEvent<T extends Store<T, E>, E = void, X = any> extends Event<T, E> {
+	error: X;
+}
+export interface Events<T extends Store<T, E>, E = void> {
+	start: (event: Event<T, E>) => void;
+	stop: (store: Event<T, E>) => void;
+	update: (store: Event<T, E>) => void;
+	error: <X>(error: ErrorEvent<T, E, X>) => void;
+}
 
 export declare type Unsubscriber = () => void;
 export declare type Updater<T> = (value: T) => T;
@@ -74,7 +89,10 @@ export abstract class Store<T extends Store<T, E>, E = void> extends Base<
 		const startStop: StartStopNotifier<T> = options.startStopNotifier || noop;
 		this.starter = (sub) => {
 			const result = startStop(sub);
-			(this as any).emit("start", this);
+			(this as any).emit("start", {
+				type: "start",
+				store: this,
+			});
 			return result;
 		};
 		if (options.maxErrorsToStore === undefined || options.maxErrorsToStore === null) {
@@ -94,7 +112,7 @@ export abstract class Store<T extends Store<T, E>, E = void> extends Base<
 			return;
 		}
 		Object.assign(this, removeReserved(value));
-		(this as any).emit("update", this);
+		(this as any).emit("update", { type: "update", store: this });
 		this.broadcast();
 	}
 	update(updater: Updater<Store<T, E>>): void {
@@ -120,6 +138,7 @@ export abstract class Store<T extends Store<T, E>, E = void> extends Base<
 			this.subscribers.delete(subscriber);
 			if (this.subscribers.size === 0) {
 				this.unsubscriber();
+				(this as any).emit({ type: "stop", store: this });
 				this.unsubscriber = null;
 			}
 		};
@@ -184,13 +203,6 @@ function noop() {}
 
 const run = 0;
 const invalidator = 1;
-
-export interface Events<T extends Store<T, E>, E = void> {
-	start: (store: T) => void;
-	stop: (store: Store<T, E>) => void;
-	error: (error: any) => void;
-	update: (store: T) => void;
-}
 
 export type PartialPayload<T> = Omit<Partial<T>, ReservedKeys>;
 

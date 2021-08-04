@@ -14,12 +14,12 @@ export function mutator<T extends Store<T, E>, E = void>(
 			result
 				.then(() => {
 					this.executing[key] = Execution.Resolved;
-					this.emit("update", this);
+					this.emit("update", { type: "update", store: this });
 					this.broadcast();
 				})
-				.catch((err) => {
+				.catch((error) => {
 					this.executing[key] = Execution.Error;
-					this.emit("error", err);
+					this.emit("error", { type: "error", store: this, error });
 					this.broadcast();
 				});
 		} else {
